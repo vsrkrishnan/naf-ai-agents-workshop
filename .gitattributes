@@ -1,0 +1,20 @@
+# Auto-clean Jupyter notebook outputs before committing
+# This ensures students see blank notebooks ready to execute
+
+*.ipynb filter=jupyter_clear_output
+
+# Text files should have LF line endings
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.pdf binary

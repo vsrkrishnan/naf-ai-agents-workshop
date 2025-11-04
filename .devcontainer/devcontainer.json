@@ -1,0 +1,56 @@
+{
+  "name": "NAF AI Agents LangGraph Workshop",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "username": "vscode",
+      "upgradePackages": true
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest",
+      "ppa": true
+    }
+  },
+  // Install dependencies using uv
+  "postCreateCommand": "pip install --upgrade pip && pip install uv && uv sync && playwright install chromium && echo '✅ Environment ready! Run: make test-foundations-1'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        "ms-python.black-formatter",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true,
+          ".pytest_cache": true,
+          "*.egg-info": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [],
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "JUPYTER_ENABLE_LAB": "yes"
+  },
+  "remoteUser": "vscode",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && bash scripts/setup_git_filters.sh",
+  "postAttachCommand": "echo 'source .venv/bin/activate' >> ~/.bashrc",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "16gb"
+  }
+}

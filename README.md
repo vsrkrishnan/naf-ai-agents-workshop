@@ -14,6 +14,7 @@
 ## 📖 Table of Contents
 
 - [Overview](#-overview)
+- [GitHub Codespaces Setup](#-github-codespaces-setup)
 - [Who This Is For](#-who-this-is-for)
 - [Learning Path](#%EF%B8%8F-learning-path)
 - [Project Structure](#%EF%B8%8F-project-structure)
@@ -43,12 +44,83 @@ This comprehensive workshop teaches network security engineers how to build AI-p
 
 ### Key Features
 
-✅ **11 comprehensive notebooks** covering TypedDict to Human-in-the-Loop patterns
-✅ **Real SCM integration** with address objects, security rules, and NAT policies
-✅ **Progressive complexity** from single-node graphs to multi-tool AI agents
-✅ **Cost-aware design** with mock data for foundations, optional LLM for advanced topics
-✅ **Production patterns** including error handling, validation, and state management
-✅ **Complete documentation** with transcripts and detailed summaries
+**11 comprehensive notebooks**
+- Progressive learning from TypedDict basics to Human-in-the-Loop patterns
+- Each notebook builds on previous concepts with hands-on exercises
+
+**Real SCM integration**
+- Address objects, address groups, and tags
+- Security rules and NAT policies
+- Production-ready API patterns with pan-scm-sdk
+
+**Progressive complexity**
+- Start with single-node graphs
+- Build to multi-tool AI agents
+- Master conditional routing and loops
+
+**Cost-aware design**
+- Phase 1 notebooks (101-107) use mock data - no API costs
+- Phase 2 notebooks (108-111) optional LLM integration
+- Learn fundamentals before spending on AI
+
+**Production patterns**
+- Error handling and validation
+- State management best practices
+- Retry logic and pagination
+
+**Complete documentation**
+- Detailed notebook summaries
+- Comprehensive setup guides
+- Real-world SCM examples
+
+---
+
+## ☁️ GitHub Codespaces Setup
+
+**Zero-install development environment in your browser**
+
+GitHub Codespaces provides a complete, pre-configured development environment without any local setup. This is the fastest way to get started with the workshop.
+
+### Quick Setup (2 minutes)
+
+1. **Fork this repository** to your own GitHub account
+   - Click the "Fork" button at the top right of this page
+   - This creates your own copy of the workshop
+
+2. **Open in your Codespace**
+   - From your forked repository, click the green "Code" button
+   - Select the "Codespaces" tab
+   - Click "Create codespace on main"
+   - Wait 2-3 minutes for the environment to build
+
+3. **Start learning**
+   - Jupyter Lab automatically opens in your browser
+   - Navigate to `notebooks/` and open `101_type_annotations.ipynb`
+   - All dependencies are pre-installed and ready to use
+
+### Benefits of GitHub Codespaces
+
+✅ **No local setup required** - Everything runs in the cloud
+✅ **Pre-configured environment** - Python, Jupyter, and all dependencies ready
+✅ **Works anywhere** - Any device with a web browser
+✅ **Free tier available** - 60 hours/month free for personal accounts
+✅ **Your own workspace** - Make changes without affecting the original repo
+
+### Adding Your API Key
+
+For notebooks 108-111, you'll need to add your Anthropic API key:
+
+```bash
+# In the Codespace terminal
+cp .env.template .env
+
+# Edit .env and add your key
+nano .env
+```
+
+### Alternative: Local Installation
+
+If you prefer local development, see the [Installation](#%EF%B8%8F-installation) section below for complete setup instructions.
 
 ---
 
@@ -105,7 +177,6 @@ Looping Workflows
 - Master LangGraph fundamentals with pure workflow mechanics
 - Build confidence with real SCM automation patterns
 - Learn state management, routing, and loops
-- Duration: ~8-10 hours
 
 ### Phase 2: LLM Integration (API Key Required)
 
@@ -113,15 +184,33 @@ Looping Workflows
 - Build conversational agents with memory
 - Create ReAct agents that use tools intelligently
 - Implement human-in-the-loop collaboration patterns
-- Duration: ~6-8 hours
 
 ---
 
 ## 🗂️ Project Structure
 
 ```text
-langgraph-workshop-notebooks/
-├── notebooks/                  # Main workshop notebooks
+naf-ai-agents-workshop/
+├── .devcontainer/              # GitHub Codespaces configuration
+│   ├── devcontainer.json
+│   └── README.md
+├── .github/                    # GitHub templates and workflows
+│   └── ISSUE_TEMPLATE/
+├── docs/                       # Workshop documentation
+│   ├── examples/               # SCM Python examples
+│   │   ├── address_objects.py
+│   │   ├── address_groups.py
+│   │   ├── security_policy.py
+│   │   ├── nat_policy.py
+│   │   ├── services.py
+│   │   ├── service_groups.py
+│   │   └── tags.py
+│   ├── NOTEBOOK_CREATION_GUIDE.md
+│   ├── STUDENT_SETUP_GUIDE.md
+│   ├── TROUBLESHOOTING.md
+│   ├── WORKSHOP_OUTLINE.md
+│   └── llms.txt                # LLM-friendly documentation
+├── notebooks/                  # Workshop notebooks (101-111)
 │   ├── 101_type_annotations.ipynb
 │   ├── 102_core_concepts.ipynb
 │   ├── 103_your_first_graph.ipynb
@@ -133,21 +222,31 @@ langgraph-workshop-notebooks/
 │   ├── 109_conversational_memory.ipynb
 │   ├── 110_react_agents_with_tools.ipynb
 │   └── 111_human_in_the_loop.ipynb
-├── transcripts/                # Instructor-led narrative transcripts
-│   ├── 101-type-annotations-transcript.md
-│   ├── 102-core-concepts-transcript.md
-│   └── ...
-├── legacy/                     # Original workshop notebooks (archived)
-│   ├── 01_state_and_graphs.ipynb
-│   ├── 02_conversational_agents.ipynb
-│   ├── 03_tools_and_react.ipynb
-│   └── 04_advanced_patterns.ipynb
-├── .env.template              # Environment configuration template
-├── pyproject.toml             # Python project configuration
-├── Makefile                   # Workshop automation commands
-├── NOTEBOOK_SUMMARY.md        # Comprehensive notebook documentation
-├── CONTRIBUTING.md            # Contribution guidelines
-└── README.md                  # This file
+├── scripts/                    # Utility scripts
+│   ├── clean_notebook.py
+│   └── setup_git_filters.sh
+├── src/                        # Source code modules
+│   ├── cli/                    # CLI application
+│   │   ├── app.py
+│   │   ├── __main__.py
+│   │   └── commands/
+│   ├── core/                   # Core functionality
+│   │   ├── client.py
+│   │   ├── config.py
+│   │   └── state.py
+│   ├── main.py                 # Monolithic workflow
+│   └── README.md
+├── .env.template               # Environment configuration template
+├── .gitignore                  # Git ignore rules
+├── .gitattributes              # Git attributes for notebook filtering
+├── CLAUDE.md                   # Claude Code instructions
+├── CONTRIBUTING.md             # Contribution guidelines
+├── Makefile                    # Workshop automation commands
+├── pyproject.toml              # Python project configuration
+├── ruff.toml                   # Ruff linter configuration
+├── WORKSHOP_FAQ.md             # Frequently asked questions
+├── WORKSHOP_PLAN.md            # Workshop planning document
+└── README.md                   # This file
 ```
 
 ---
@@ -599,9 +698,10 @@ make help                  # Show all available commands
 
 ## 🏗️ Workshop Phases
 
+This workshop is designed to be completed in approximately **4 hours** of instructor-led training, with additional time available for self-paced exploration and exercises.
+
 ### Phase 1: Foundations (Notebooks 101-107)
 
-**Duration:** 8-10 hours
 **API Key Required:** No
 **Focus:** Core LangGraph patterns without LLM integration
 
@@ -631,7 +731,6 @@ make help                  # Show all available commands
 
 ### Phase 2: LLM Integration (Notebooks 108-111)
 
-**Duration:** 6-8 hours
 **API Key Required:** Yes (Anthropic)
 **Focus:** Adding AI capabilities to your workflows
 
@@ -765,9 +864,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### Workshop Resources
 
-- **Notebook Summaries**: See [NOTEBOOK_SUMMARY.md](NOTEBOOK_SUMMARY.md) for comprehensive details
-- **Transcripts**: Located in `transcripts/` directory for instructor-led narratives
-- **SCM Examples**: Reference patterns in notebooks for real API structures
+- **Setup Guides**: See [docs/STUDENT_SETUP_GUIDE.md](docs/STUDENT_SETUP_GUIDE.md) for detailed setup instructions
+- **Workshop Outline**: See [docs/WORKSHOP_OUTLINE.md](docs/WORKSHOP_OUTLINE.md) for session planning
+- **SCM Examples**: Reference patterns in [docs/examples/](docs/examples/) for real API structures
+- **Troubleshooting**: See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for common issues
 
 ### Community
 
