@@ -2,12 +2,12 @@
 Run command - Execute the LangGraph workflow.
 """
 
-import uuid
 from pathlib import Path
 from typing import Optional
 
 import typer
 from langchain_core.messages import HumanMessage
+from langsmith import uuid7
 from rich.console import Console
 from rich.panel import Panel
 
@@ -135,7 +135,7 @@ def _run_interactive(app, thread_id: Optional[str], recursion_limit: int):
         )
     )
 
-    tid = thread_id or str(uuid.uuid4())
+    tid = thread_id or str(uuid7())
     console.print(f"\n[dim]Session ID:[/dim] {tid}")
     console.print(f"[dim]Recursion Limit:[/dim] {recursion_limit}\n")
 
@@ -180,7 +180,7 @@ def _run_prompt(app, prompt_text: str, thread_id: Optional[str], recursion_limit
     console.print(f"[bold cyan]Processing:[/bold cyan] {prompt_text}\n")
 
     config = {
-        "configurable": {"thread_id": thread_id or str(uuid.uuid4())},
+        "configurable": {"thread_id": thread_id or str(uuid7())},
         "recursion_limit": recursion_limit,
     }
 
@@ -210,7 +210,7 @@ def _run_file(app, file_path: Path, thread_id: Optional[str], recursion_limit: i
         raise typer.Exit(code=1)
 
     config = {
-        "configurable": {"thread_id": thread_id or str(uuid.uuid4())},
+        "configurable": {"thread_id": thread_id or str(uuid7())},
         "recursion_limit": recursion_limit,
     }
 
