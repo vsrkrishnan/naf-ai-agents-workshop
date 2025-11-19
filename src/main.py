@@ -30,16 +30,7 @@ Example Prompts:
 - "Commit changes to Texas and California"
 """
 
-import warnings
 from typing import Literal
-
-# Suppress LangSmith UUID v7 warning from Pydantic v1 (internal to LangChain)
-warnings.filterwarnings(
-    "ignore",
-    message="LangSmith now uses UUID v7",
-    category=UserWarning,
-    module="pydantic.v1.main",
-)
 
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
